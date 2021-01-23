@@ -1,0 +1,23 @@
+#mount point    fstype      device                      device2                 flags
+/boot            emmc     /dev/block/platform/bootdevice/by-name/boot           flags=backup=1;display="Boot" 
+/recovery        emmc     /dev/block/platform/bootdevice/by-name/recovery       flags=display="Recovery"
+
+/system_root	 ext4     /dev/block/platform/bootdevice/by-name/system	        flags=display="System";wipeingui;backup=0
+/system_image    emmc     /dev/block/by-name/system				                flags=backup=1;display="System Image"
+/vendor          ext4     /dev/block/platform/bootdevice/by-name/vendor		    flags=backup=0;display="Vendor";wipeingui
+/vendor_image    emmc     /dev/block/by-name/vendor				                flags=backup=1;display="Vendor Image"
+
+/cache           ext4     /dev/block/platform/bootdevice/by-name/cache
+/data		     ext4     /dev/block/platform/bootdevice/by-name/userdata       flags=encryptable=/dev/block/platform/bootdevice/by-name/metadata;dm_use_original_path
+
+/persist         ext4     /dev/block/platform/bootdevice/by-name/persist        flags=fsflags=ro;mounttodecrypt
+/product         ext4     /dev/block/platform/bootdevice/by-name/product
+/lenovocust      ext4     /dev/block/platform/bootdevice/by-name/lenovocust
+/nvram           emmc     /dev/block/platform/bootdevice/by-name/nvram          flags=backup=1
+/nvdata          ext4     /dev/block/platform/bootdevice/by-name/nvdata         flags=backup=1
+/nvcfg           ext4     /dev/block/platform/bootdevice/by-name/nvcfg          flags=backup=1
+/vbmeta		     emmc     /dev/block/platform/bootdevice/by-name/vbmeta		    flags=backup=1
+
+# External devices
+/external_sd     auto	  /dev/block/mmcblk1p1	        /dev/block/mmcblk1      flags=display="MicroSD";storage;wipeingui;removable
+/usb_otg	     auto     /dev/block/sda1               /dev/block/sda          flags=display="USB OTG";storage;wipeingui;removable
