@@ -3,7 +3,7 @@
 ## Release info
 This is an unofficial build.  Install at your own risk.
 
-Build with TWRP for Android 10.0.  See "MediaTek HW FDE" below for cherrypick instructions.
+Build with TWRP for Android 10.0.
 
 ### About Device
 
@@ -39,11 +39,3 @@ make clean
 mka recoveryimage
 ```
 
-## MediaTek HW FDE
-Until it's merged into android-10.0 branch, you'll need to cherrypick [patch 3237](https://gerrit.twrp.me/c/android_bootable_recovery/+/3237)
-```
-git fetch ssh://<your_userid>@gerrit.twrp.me:29418/android_bootable_recovery refs/changes/37/3237/3 && git cherry-pick FETCH_HEAD
-```
-The reason for this is that MTK HW FDE support in the kernel expects the blkdev path to have the string "bootdevice" in it.  If you don't include this patch, TWRP will convert the /data blkdev path to the real block device name, which doesn't include the "bootdevice" string.  This breaks dm-crypt in the kernel, which breaks decryption in twrp.
-
-**Note:** "dm_use_original_path" twrp flag for /data in twrp.fstab is required to make MTK HW FDE work.
