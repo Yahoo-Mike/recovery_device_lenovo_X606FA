@@ -3,7 +3,7 @@
 ## Release info
 This is an unofficial build.  Install at your own risk.
 
-Build with TWRP for Android 10.0.
+Build with minimal Omni TWRP for Android 10.0.
 
 ### About Device
 
@@ -39,3 +39,5 @@ make clean
 mka recoveryimage
 ```
 
+## Cherrypick
+The splashscreen does not display during boot.  To fix this, use [change 1995](https://gerrit.twrp.me/c/android_bootable_recovery/+/1995).  Change #1995 was merged into the android-9.0 branch.  Once it is cherry-picked and merged into the official android-10.0 branch, there will be no need to cherrypick it yourself.
