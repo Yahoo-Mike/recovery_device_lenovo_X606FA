@@ -24,11 +24,11 @@ PRODUCT_RELEASE_NAME := X606FA
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
 # Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common_tablet.mk)
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 # Device identifier.
-PRODUCT_NAME := omni_X606FA
-PRODUCT_DEVICE := X606FA
+PRODUCT_NAME := twrp_$(PRODUCT_RELEASE_NAME)
+PRODUCT_DEVICE := $(PRODUCT_RELEASE_NAME)
 PRODUCT_BRAND := Lenovo
 PRODUCT_MODEL := Lenovo TB-X606FA
 PRODUCT_MANUFACTURER := LENOVO

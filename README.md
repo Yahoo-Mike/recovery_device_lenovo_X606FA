@@ -3,7 +3,7 @@
 ## Release info
 This is an unofficial build.  Install at your own risk.
 
-Build with minimal Omni TWRP for Android 10.0.
+Build with minimal AOSP TWRP for Android 11.0.
 
 ### About Device
 
@@ -34,8 +34,7 @@ Release Date | August 2020
 ## To build
 ```
 . build/envsetup.sh
-lunch omni_X606FA-eng
-make clean 
+lunch twrp_X606FA-eng
 mka recoveryimage
 ```
 

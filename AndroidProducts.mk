@@ -17,9 +17,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_X606FA.mk
+    $(LOCAL_DIR)/twrp_X606FA.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_X606FA-userdebug \
-    omni_X606FA-user \
-    omni_X606FA-eng
+    twrp_X606FA-userdebug \
+    twrp_X606FA-user \
+    twrp_X606FA-eng
