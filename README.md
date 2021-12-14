@@ -38,3 +38,15 @@ lunch twrp_X606FA-eng
 mka recoveryimage
 ```
 
+## Android 12: patch for FDE decryption
+There was a change in the data structure for Keymaster in Android 12.  It is incompatible with vendor blobs prior to A12.
+
+To make FDE decryption work, you will need to cherrypick this commit: [https://github.com/Yahoo-Mike/android_bootable_recovery/commit/b520ff41c5a0e7d35d8b8de426602975cf642ac0](https://github.com/Yahoo-Mike/android_bootable_recovery/commit/b520ff41c5a0e7d35d8b8de426602975cf642ac0)
+
+Once this is available in TeamWin/android_bootable_recovery, I will delete this commit.
+
+Make sure the following flags are set in BoardConfig.mk.  If not, Keymaster will fail with an INVALID_ARGS error:
+```
+PLATFORM_VERSION := 127
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+```
