@@ -40,8 +40,9 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_IS_64_BIT := true
 
 # Kernel
-BOARD_KERNEL_IMAGE_NAME := zImage
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/zImage
+# change kernel name, depending on which device you are building for
+BOARD_KERNEL_IMAGE_NAME := x606fa_zImage
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
 
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive

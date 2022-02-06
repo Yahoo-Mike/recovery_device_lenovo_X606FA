@@ -32,6 +32,7 @@ Release Date | August 2020
 
 
 ## To build
+If building for the TB-X606F, change BOARD_KERNEL_IMAGE_NAME in BoardConfig.mk before building.
 ```
 . build/envsetup.sh
 lunch twrp_X606FA-eng
