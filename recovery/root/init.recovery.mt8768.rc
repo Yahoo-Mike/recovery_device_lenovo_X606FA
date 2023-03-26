@@ -24,31 +24,20 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+
 on init
     export ANDROID_ROOT /system_root
 
-    start servicemanager
-    start hwservicemanager
-
-# system services
-service hwservicemanager /system/bin/hwservicemanager
-    user root
-    group root
-    disabled
-    onrestart setprop hwservicemanager.ready false
-    seclabel u:r:recovery:s0
-
-service servicemanager /system/bin/servicemanager
-    user root
-    group root readproc
-    disabled
-    seclabel u:r:recovery:s0
+on fs
+    install_keyring
 
 # vendor services
-service keymaster-4-0 /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
+service keymaster-4-0-bp /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
     user root
     group root
+    setenv LD_LIBRARY_PATH /km_lib64:/vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     disabled
+    oneshot
     seclabel u:r:recovery:s0
 
 service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
@@ -66,28 +55,25 @@ service teei_daemon /vendor/bin/teei_daemon
 # decryption process
 on property:hwservicemanager.ready=true
     start teei_daemon
-    start keymaster-4-0
+    start keymaster-4-0-bp
     start gatekeeper-1-0
+
+on property:twrp.all.users.decrypted=true
+    stop gatekeeper-1-0
+    stop keymaster-4-0-bp
+    stop teei_daemon
 
 on property:ro.crypto.state=unsupported
     stop gatekeeper-1-0
-    stop keymaster-4-0
+    stop keymaster-4-0-bp
     stop teei_daemon
-    stop servicemanager
-    stop hwservicemanager
 
 on property:ro.crypto.state=unencrypted
     stop gatekeeper-1-0
-    stop keymaster-4-0
+    stop keymaster-4-0-bp
     stop teei_daemon
-    stop servicemanager
-    stop hwservicemanager
 
 on property:twrp.decrypt.done=true
     stop gatekeeper-1-0
-    stop keymaster-4-0
+    stop keymaster-4-0-bp
     stop teei_daemon
-    stop servicemanager
-    stop hwservicemanager
-    
-

@@ -36,9 +36,6 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 
-TARGET_USES_64_BIT_BINDER := true
-TARGET_IS_64_BIT := true
-
 # Kernel
 # change kernel name, depending on which device you are building for
 BOARD_KERNEL_IMAGE_NAME := x606fa_zImage
@@ -76,7 +73,7 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TW_INCLUDE_CRYPTO := true
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 127
+PLATFORM_VERSION := 16.1.0
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 
 # display
@@ -97,7 +94,3 @@ TW_EXCLUDE_SUPERSU := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_EXTRA_LANGUAGES := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-
-TW_OVERRIDE_SYSTEM_PROPS := \ "ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
-
-

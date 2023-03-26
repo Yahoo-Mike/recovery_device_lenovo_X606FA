@@ -10,10 +10,7 @@
 /dev/block/platform/bootdevice/by-name/vendor /vendor ext4 ro wait,recoveryonly
 
 
-
-
-/dev/block/platform/bootdevice/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,errors=panic wait,check,quota,reservedsize=200M,formattable,resize,encryptable=/dev/block/platform/bootdevice/by-name/metadata
-# original /dev/block/platform/bootdevice/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,errors=panic wait,check,quota,reservedsize=200M,formattable,resize,forcefdeorfbe=/dev/block/platform/bootdevice/by-name/metadata
+/dev/block/platform/bootdevice/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,errors=panic wait,check,quota,reservedsize=200M,formattable,resize,fileencryption=aes-256-xts:aes-256-cts
 
 /dev/block/platform/bootdevice/by-name/cache /cache ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable
 

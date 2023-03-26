@@ -21,7 +21,11 @@ ALLOW_MISSING_DEPENDENCIES := true
 PRODUCT_RELEASE_NAME := X606FA
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+
+# Installs gsi keys into ramdisk, to boot a GSI with verified boot.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/twrp/config/common.mk)
@@ -32,5 +36,3 @@ PRODUCT_DEVICE := $(PRODUCT_RELEASE_NAME)
 PRODUCT_BRAND := Lenovo
 PRODUCT_MODEL := Lenovo TB-X606FA
 PRODUCT_MANUFACTURER := LENOVO
-
-

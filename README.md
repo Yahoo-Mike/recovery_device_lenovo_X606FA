@@ -3,7 +3,11 @@
 ## Release info
 This is an unofficial build.  Install at your own risk.
 
-Build with minimal AOSP TWRP for Android 11.0.
+Build with minimal AOSP TWRP for Android 12.1.
+
+This branch was created when Android 13 removed support for FDE (full disk encryption).  It will work with A13 GSIs that use FBE (file-based encryption) with aes-256-xts:aes-256-cts.
+
+Stock ROMs use FDE, so this branch will **not** work with stock ROMs.
 
 ### About Device
 
@@ -39,15 +43,7 @@ lunch twrp_X606FA-eng
 mka recoveryimage
 ```
 
-## Android 12: patch for FDE decryption
-There was a change in the data structure for Keymaster in Android 12.  It is incompatible with vendor blobs prior to A12.
+## Android 12: patch for FBE decryption
+There was a change in the data structure for Keymaster in Android 12.  It is incompatible with vendor blobs prior to A12 (like our device).
 
-To make FDE decryption work, you will need to cherrypick this commit: [https://github.com/Yahoo-Mike/android_bootable_recovery/commit/b520ff41c5a0e7d35d8b8de426602975cf642ac0](https://github.com/Yahoo-Mike/android_bootable_recovery/commit/b520ff41c5a0e7d35d8b8de426602975cf642ac0)
-
-Once this is available in TeamWin/android_bootable_recovery, I will delete this commit.
-
-Make sure the following flags are set in BoardConfig.mk.  If not, Keymaster will fail with an INVALID_ARGS error:
-```
-PLATFORM_VERSION := 127
-PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
-```
+To make FBE decryption work, you will need to apply the patch: patch/system/vold/0001-Remove-a12-kmblob-magic.patch to TWRP before compiling.

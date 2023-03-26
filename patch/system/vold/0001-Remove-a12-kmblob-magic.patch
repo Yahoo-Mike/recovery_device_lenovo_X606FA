@@ -1,0 +1,41 @@
+From 5c9e3428911b1014b8bb18e9b2cf201471c57d70 Mon Sep 17 00:00:00 2001
+From: Yahoo-Mike <ya_mikew@yahoo.com.au>
+Date: Sun, 26 Mar 2023 14:57:50 +1100
+Subject: [PATCH] Remove a12 kmblob magic. Our vendor keymaster blobs are from
+ A10.  In A12, the format of a keymaster blob was changed to include an 8-char
+ magic header. We remove the magic so that the pre-A12 km can process the
+ blob.
+
+---
+ KeyStorage.cpp | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/KeyStorage.cpp b/KeyStorage.cpp
+index 6b0584c..6567b6f 100644
+--- a/KeyStorage.cpp
++++ b/KeyStorage.cpp
+@@ -364,6 +364,21 @@ static KeymasterOperation BeginKeymasterOp(Keymaster& keymaster, const std::stri
+         // DeleteUpgradedKey(keymaster, upgraded_blob_file);
+     if (!readFileToString(blob_file, &blob)) return KeymasterOperation();
+     // }
++
++    // check if we have "pKMBlob" magic (introduced in A12).  If we do, remove it.
++    //  We have to remove it because we are using a pre-A12 KeyMaster blob to decrypt/encrypt
++    const size_t KMBLOB_MAGIC_SIZE = 8;
++    const char   kmBlobMagic[KMBLOB_MAGIC_SIZE] = "pKMblob";
++
++    if ( (blob.size() > KMBLOB_MAGIC_SIZE) &&
++         (blob.compare(0, KMBLOB_MAGIC_SIZE-1, kmBlobMagic) == 0) &&
++         (blob[7] == '\0') ) {
++
++        // This is an Android 12 keymaster_key_blob.  The format is different from previous OS versions.
++        // We can just remove the magic at the beginning, and then it will be compatible with previous versions.
++        blob.erase(0,KMBLOB_MAGIC_SIZE);
++    }
++
+     auto opHandle = keymaster.begin(blob, inParams, outParams);
+     if (!opHandle) return opHandle;
+ 
+-- 
+2.17.1
+
