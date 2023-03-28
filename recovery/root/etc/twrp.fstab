@@ -8,7 +8,7 @@
 /vendor_image    emmc     /dev/block/by-name/vendor				                flags=backup=1;display="Vendor Image"
 
 /cache           ext4     /dev/block/platform/bootdevice/by-name/cache
-/data                ext4     /dev/block/platform/bootdevice/by-name/userdata       flags=fileencryption=aes-256-xts:aes-256-cts;dm_use_original_path
+/data                ext4     /dev/block/platform/bootdevice/by-name/userdata       flags=fileencryption=aes-256-xts:aes-256-cts
 
 /persist         ext4     /dev/block/platform/bootdevice/by-name/persist        flags=fsflags=ro;mounttodecrypt
 /product         ext4     /dev/block/platform/bootdevice/by-name/product
