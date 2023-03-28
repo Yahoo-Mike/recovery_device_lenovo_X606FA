@@ -3,11 +3,13 @@
 ## Release info
 This is an unofficial build.  Install at your own risk.
 
-Build with minimal AOSP TWRP for Android 12.1.
+Build with [minimal AOSP TWRP for Android 12.1](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/tree/twrp-12.1).
 
-This branch was created when Android 13 removed support for FDE (full disk encryption).  It will work with A13 GSIs that use FBE (file-based encryption) with aes-256-xts:aes-256-cts.
+This branch was created when Android 13 removed support for FDE (full disk encryption).  It will work with any ROMs/GSIs that use FBE (file-based encryption) with aes-256-xts:aes-256-cts.
 
-Stock ROMs use FDE, so this branch will **not** work with stock ROMs.
+Stock ROMs use FDE, so this branch will **not** work with stock ROMs.  For stock ROM support, use branch [android-11.0](https://github.com/Yahoo-Mike/recovery_device_lenovo_X606FA/tree/android-11.0).
+
+Support Thread on [XDA](https://forum.xda-developers.com/t/4222887/).
 
 ### About Device
 
@@ -44,6 +46,6 @@ mka recoveryimage
 ```
 
 ## Android 12: patch for FBE decryption
-There was a change in the data structure for Keymaster in Android 12.  It is incompatible with vendor blobs prior to A12 (like our device).
+There was a change in the data structure for Keymaster in Android 12.  It is incompatible with vendor blobs prior to A12 (like this device).
 
-To make FBE decryption work, you will need to apply the patch: patch/system/vold/0001-Remove-a12-kmblob-magic.patch to TWRP before compiling.
+To make FBE decryption work, you will need to apply [this patch](https://github.com/Yahoo-Mike/recovery_device_lenovo_X606FA/tree/android-12.1-fbe/patch/system/vold) to TWRP before compiling.
